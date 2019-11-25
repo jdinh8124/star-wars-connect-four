@@ -1,8 +1,21 @@
-$(document).ready(initializeApp);
+$(document).ready(initalizeApp);
 
-function initializeApp() {
+var player1Click = null;
+var player2Click = null;
+
+function initalizeApp(){
+  $('.square').on('click', clickConnect);
   createSquare();
 }
+
+//when you click on a square, you want to add a class of
+function clickConnect (event){
+  if (player1Click === null){
+  $(event.currentTarget).addClass('red')
+  } else {
+    player2Click === null;
+    $(event.currentTarget).addClass('yellow')
+
 
 //check if there are consecutive 4 chips on the game board
 //variables: 4 counters that goes up 1 individually when there are consecutive
