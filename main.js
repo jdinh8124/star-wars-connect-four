@@ -18,7 +18,6 @@ function clickConnect (event){
   }
 }
 
-
 //check if there are consecutive 4 chips on the game board
 //variables: 4 counters that goes up 1 individually when there are consecutive
 //same color on their respective direction: vertical, horizontal, 2 diagnal
