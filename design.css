@@ -48,3 +48,8 @@
   border: 2px solid black;
   margin-top: 15px;
 }
+.square{
+  height: 16%;
+  width: 11.6vw;
+  border: 2px solid black;
+}
