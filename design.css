@@ -1,0 +1,50 @@
+
+.header{
+  background: tan;
+  position: relative;
+  height: 15vh;
+  width: 100%;
+   border: 2px solid black;
+}
+.gameAndStats{
+  display: flex;
+  height: 80vh;
+  width: 100%;
+}
+.gamespace{
+  background-color: blue;
+  display: flex;
+  width: 85%;
+  height:100%;
+  border: 2px solid black;
+}
+.stats{
+  margin: 2px;
+  text-align: center;
+  background-color: burlywood;
+  width: 15%;
+  height: 100%;
+  border: 2px solid black;
+}
+.twoPlayers{
+  display: inline-block;
+  height: 60%;
+  width:  80%;
+  border: 2px solid black;
+  margin: 2px;
+}
+.players{
+  height: 50%;
+  width: 100%;
+  display: inline-block;
+   border: 2px solid black;
+   margin: 2px;
+
+}
+.gameInfo{
+  display: inline-block;
+  height: 35%;
+  width:80%;
+  border: 2px solid black;
+  margin-top: 15px;
+}
