@@ -15,7 +15,8 @@ function clickConnect (event){
   } else {
     player2Click === null;
     $(event.currentTarget).addClass('yellow')
-
+  }
+}
 
 //check if there are consecutive 4 chips on the game board
 //variables: 4 counters that goes up 1 individually when there are consecutive
