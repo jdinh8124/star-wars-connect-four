@@ -28,13 +28,13 @@ function clickConnect (event){
 //if the class shows up is the same as the previous one, counter goes up 1
 //if the class is different from the previous class, counter reset to 0
 //if counter goes to 4, call game winning function and exit the code block
-// function checkConnect() {
-//   var rowColorCounter = null, colColorCoutner = null,
-//     topLeftDiaColorCounter = null, botLeftDiaColorCounter = null;
-//   for (var index = 0; index < 42; index++) {
-//     if ()
-//   }
-// }
+function checkConnect() {
+  var rowColorCounter = null, colColorCoutner = null,
+    topLeftDiaColorCounter = null, botLeftDiaColorCounter = null;
+  for (var index = 0; index < 42; index++) {
+    if ()
+  }
+}
 
 //DOM Creation
 //Create 42 space inside gamespace
