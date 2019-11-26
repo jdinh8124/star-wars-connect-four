@@ -3,22 +3,22 @@ $(document).ready(initalizeApp);
 var turnCounter = 1;
 
 function initalizeApp(){
-  $('.square').on('click', clickConnect);
   createSquare();
+  $('.square').on('click', clickConnect);
 }
 
 //when you click on a square, you want to add a class of
 function clickConnect (event){
-
- var currentSquare = $(event.currentTarget);
-  if (!currentSquare.hasClass('red') && !currentSquare.hasClass('yellow')){
-    if(turnCounter % 2 == 1){
+  var currentSquare = $(event.currentTarget);
+  if (!currentSquare.hasClass('red') && !currentSquare.hasClass('yellow')) {
+    if (turnCounter % 2 === 1) {
       currentSquare.addClass('red');
-  }else{
-    currentSquare.addClass('yellow');
+    } else {
+      currentSquare.addClass('yellow');
+    }
+    turnCounter += 1;
   }
-  }
-
+  checkConnect();
 }
 
 
@@ -40,10 +40,10 @@ function checkConnect() {
   checkLoop(square, 'col');
   checkLoop(square, 'topLeftDia');
   checkLoop(square, 'botLeftDia');
-  console.log(square);
 }
 
 function checkLoop(square, selector) {
+  //debugger;
   var colorCounter = null, loopCount = null, currentColor = null, prevColor = null;
   if (selector === 'row') {
     loopCount = 6;
@@ -54,10 +54,14 @@ function checkLoop(square, selector) {
   }
   for (var i = 0; i < loopCount; i++) {
     for (var j = 0; j < 42; j++) {
-      if (square[j].attr(selector) === i) {
-        if (square[j].hasClass('red')) {
+      //console.log("current square: ", $(square[j]));
+      //console.log("current selector: ", selector );
+      //console.log("current value: " + $(square[j]).attr(selector) + ", " + i);
+      if (parseInt($(square[j]).attr(selector)) === i+1) {
+        //console.log("matched! " + selector);
+        if ($(square[j]).hasClass('red')) {
           currentColor = 'red';
-        } else if (square[j].hasClass('yellow')) {
+        } else if ($(square[j]).hasClass('yellow')) {
           currentColor = 'yellow';
         } else {
           currentColor = 'empty';
@@ -73,9 +77,12 @@ function checkLoop(square, selector) {
           //win condition
           console.log("you won the game!");
         }
+        //console.log("currentColor: " + currentColor + ", " + colorCounter);
         prevColor = currentColor;
       }
     }
+    //console.log("colorCounter: ", colorCounter);
+    colorCounter = 0;
   }
 }
 
