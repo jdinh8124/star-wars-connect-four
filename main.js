@@ -4,24 +4,46 @@ var turnCounter = 1;
 
 function initalizeApp(){
   createSquare();
-  $('.square').on('click', clickConnect);
+  $('.square').on('click', clickConnect2);
 }
 
 //when you click on a square, you want to add a class of
-function clickConnect (event){
+// function clickConnect (event){
+//   var currentSquare = $(event.currentTarget);
+//   if (!currentSquare.hasClass('red') && !currentSquare.hasClass('yellow')) {
+//     if (turnCounter % 2 === 1) {
+//       currentSquare.addClass('red');
+//     } else {
+//       currentSquare.addClass('yellow');
+//     }
+//     turnCounter += 1;
+//   }
+//   checkConnect();
+// }
+
+function clickConnect2(event) {
   var currentSquare = $(event.currentTarget);
-  if (!currentSquare.hasClass('red') && !currentSquare.hasClass('yellow')) {
-    if (turnCounter % 2 === 1) {
-      currentSquare.addClass('red');
-    } else {
-      currentSquare.addClass('yellow');
+  var currentSquareCol = $(event.currentTarget).attr("col");
+  for (var loopThroughCol = 6; loopThroughCol >= 1; loopThroughCol--) {
+    var searchRow = "[row=" + loopThroughCol + "]";
+    var searchCol = "[col=" + currentSquareCol + "]";
+    var combined = searchCol + searchRow;
+   var rowAndCol = $(combined);
+   console.log(rowAndCol)
+    if (!rowAndCol.hasClass('red') && !rowAndCol.hasClass('yellow')){
+      if (turnCounter % 2 === 1) {
+      rowAndCol.addClass('red');
+      turnCounter += 1;
+      return;
+      }else {
+      rowAndCol.addClass('yellow');
+      turnCounter += 1;
+      return;
     }
-    turnCounter += 1;
   }
+}
   checkConnect();
 }
-
-
 
 //check if there are consecutive 4 chips on the game board
 //variables: 4 counters that goes up 1 individually when there are consecutive
