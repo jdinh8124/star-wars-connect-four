@@ -58,3 +58,9 @@ margin-bottom: 2px;
   width: 11.75vw;
   border: 2px solid black;
 }
+.red{
+  background-color: red;
+}
+.yellow{
+  background-color: yellow;
+}
