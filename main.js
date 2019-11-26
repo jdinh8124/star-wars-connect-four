@@ -3,8 +3,9 @@ $(document).ready(initalizeApp);
 var turnCounter = 1;
 
 function initalizeApp(){
-  $('.square').on('click', clickConnect);
   createSquare();
+  $('.square').on('click', clickConnect);
+
 }
 
 //when you click on a square, you want to add a class of
@@ -14,8 +15,10 @@ function clickConnect (event){
   if (!currentSquare.hasClass('red') && !currentSquare.hasClass('yellow')){
     if(turnCounter % 2 == 1){
       currentSquare.addClass('red');
+      turnCounter+=1;
   }else{
     currentSquare.addClass('yellow');
+      turnCounter += 1;
   }
   }
 
