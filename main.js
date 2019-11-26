@@ -1,33 +1,54 @@
 $(document).ready(initalizeApp);
 
 var turnCounter = 1;
+var gamesPlayed = 0;
 
 function initalizeApp(){
   createSquare();
-  $('.square').on('click', clickConnect);
-
+  $('.square').on('click', clickConnect2);
 }
 
 //when you click on a square, you want to add a class of
-function clickConnect (event){
+// function clickConnect (event){
+//   var currentSquare = $(event.currentTarget);
+//   if (!currentSquare.hasClass('red') && !currentSquare.hasClass('yellow')) {
+//     if (turnCounter % 2 === 1) {
+//       currentSquare.addClass('red');
+//     } else {
+//       currentSquare.addClass('yellow');
+//     }
+//     turnCounter += 1;
+//   }
+//   checkConnect();
+// }
 
- var currentSquare = $(event.currentTarget);
-  if (!currentSquare.hasClass('red') && !currentSquare.hasClass('yellow')){
-    if(turnCounter % 2 == 1){
-      currentSquare.addClass('red');
-      turnCounter+=1;
-  }else{
-    currentSquare.addClass('yellow');
+function clickConnect2(event) {
+  var currentSquareCol = $(event.currentTarget).attr("col");
+  for (var loopThroughCol = 6; loopThroughCol >= 1; loopThroughCol--) {
+    var searchRow = "[row=" + loopThroughCol + "]";
+    var searchCol = "[col=" + currentSquareCol + "]";
+    var combined = searchCol + searchRow;
+   var rowAndCol = $(combined);
+   console.log(rowAndCol)
+    if (!rowAndCol.hasClass('red') && !rowAndCol.hasClass('yellow')){
+      if (turnCounter % 2 === 1) {
+      rowAndCol.addClass('red');
       turnCounter += 1;
+      checkConnect();
+      return;
+      }else {
+      rowAndCol.addClass('yellow');
+      turnCounter += 1;
+      checkConnect();
+      return;
+    }
   }
-  }
-
 }
-
-
+}
 
 //check if there are consecutive 4 chips on the game board
 //variables: 4 counters that goes up 1 individually when there are consecutive
+
 //same color on their respective direction: vertical, horizontal, 2 diagnal
 //directions; 4 variables that stores previous direction color
 //do 1 loops for game board size
@@ -43,10 +64,10 @@ function checkConnect() {
   checkLoop(square, 'col');
   checkLoop(square, 'topLeftDia');
   checkLoop(square, 'botLeftDia');
-  console.log(square);
 }
 
 function checkLoop(square, selector) {
+  //debugger;
   var colorCounter = null, loopCount = null, currentColor = null, prevColor = null;
   if (selector === 'row') {
     loopCount = 6;
@@ -57,10 +78,14 @@ function checkLoop(square, selector) {
   }
   for (var i = 0; i < loopCount; i++) {
     for (var j = 0; j < 42; j++) {
-      if (square[j].attr(selector) === i) {
-        if (square[j].hasClass('red')) {
+      //console.log("current square: ", $(square[j]));
+      //console.log("current selector: ", selector );
+      //console.log("current value: " + $(square[j]).attr(selector) + ", " + i);
+      if (parseInt($(square[j]).attr(selector)) === i+1) {
+        //console.log("matched! " + selector);
+        if ($(square[j]).hasClass('red')) {
           currentColor = 'red';
-        } else if (square[j].hasClass('yellow')) {
+        } else if ($(square[j]).hasClass('yellow')) {
           currentColor = 'yellow';
         } else {
           currentColor = 'empty';
@@ -73,12 +98,16 @@ function checkLoop(square, selector) {
           colorCounter++;
         }
         if (colorCounter === 4) {
+          resetStats();
           //win condition
           console.log("you won the game!");
         }
+        //console.log("currentColor: " + currentColor + ", " + colorCounter);
         prevColor = currentColor;
       }
     }
+    //console.log("colorCounter: ", colorCounter);
+    colorCounter = 0;
   }
 }
 
@@ -108,3 +137,18 @@ function createSquare() {
     gameSpace.append(newCol);
   }
 }
+
+
+function resetStats(){
+  gamesPlayed++;
+  $('.gameInfo').text(gamesPlayed);
+  setTimeout(function() {
+  if ($('.square').hasClass('red') || $('.square').hasClass('yellow')){
+    $('.square').removeClass('red');
+    $('.square').removeClass('yellow');
+  }}, 1000);
+  turnCounter = 1;
+}
+
+
+//include a tied factor. if the game ties
