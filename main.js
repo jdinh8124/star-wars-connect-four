@@ -22,7 +22,6 @@ function initalizeApp(){
 // }
 
 function clickConnect2(event) {
-  var currentSquare = $(event.currentTarget);
   var currentSquareCol = $(event.currentTarget).attr("col");
   for (var loopThroughCol = 6; loopThroughCol >= 1; loopThroughCol--) {
     var searchRow = "[row=" + loopThroughCol + "]";
@@ -34,15 +33,16 @@ function clickConnect2(event) {
       if (turnCounter % 2 === 1) {
       rowAndCol.addClass('red');
       turnCounter += 1;
+      checkConnect();
       return;
       }else {
       rowAndCol.addClass('yellow');
       turnCounter += 1;
+      checkConnect();
       return;
     }
   }
 }
-  checkConnect();
 }
 
 //check if there are consecutive 4 chips on the game board
