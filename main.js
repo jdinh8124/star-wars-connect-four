@@ -1,7 +1,6 @@
 $(document).ready(initalizeApp);
 
-var player1Click = null;
-var player2Click = null;
+var turnCounter = 1;
 
 function initalizeApp(){
   $('.square').on('click', clickConnect);
@@ -10,13 +9,19 @@ function initalizeApp(){
 
 //when you click on a square, you want to add a class of
 function clickConnect (event){
-  if (player1Click === null){
-  $(event.currentTarget).addClass('red')
-  } else {
-    player2Click === null;
-    $(event.currentTarget).addClass('yellow');
+
+ var currentSquare = $(event.currentTarget);
+  if (!currentSquare.hasClass('red') && !currentSquare.hasClass('yellow')){
+    if(turnCounter % 2 == 1){
+      currentSquare.addClass('red');
+  }else{
+    currentSquare.addClass('yellow');
   }
+  }
+
 }
+
+
 
 //check if there are consecutive 4 chips on the game board
 //variables: 4 counters that goes up 1 individually when there are consecutive
