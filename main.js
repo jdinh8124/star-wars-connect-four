@@ -15,7 +15,7 @@ function initalizeApp(){
 
 function tieGame(){
   if(turnCounter >= 43){
-    resetStats();
+    resetGameKeepStats();
     //insert a modal? Reset game?
   }
 }
