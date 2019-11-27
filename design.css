@@ -6,12 +6,9 @@
 } */
 
 body{
-
-  background-color: black;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url(/assets/86727.jpg);
-
 }
 
 header{
@@ -22,22 +19,18 @@ header{
     margin: auto;
     color: yellow;
    font-family: 'Poller One', cursive;
-
 }
 .gameAndStats{
     display: flex;
     height: 75vh;
     width: 70vw;
     margin: auto;
-
 }
 .gamespace{
     display: flex;
     width: 85%;
     height: 100%;
     justify-content: space-evenly;
-
-
 }
 
 .col{
