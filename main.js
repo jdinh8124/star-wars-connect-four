@@ -25,10 +25,11 @@ function initalizeApp(){
   });
   $(".modalStart").on("click", function(){
     $(".modalStart").addClass("closeModal")
+    gameStartSound.play();
+    backgroundMusic.play();
   });
   //$('.choiceContainer').on('click', $('.choice'), playerSelect);
-  gameStartSound.play();
-  backgroundMusic.play();
+
 
   $('.resetGameButton').on('click', resetGame);
   $('.startOverFreshButton').on('click', startGameOverNoStats);
@@ -188,6 +189,7 @@ function resetGameKeepStats(){
       $('.square').removeClass(colorChoice[1]).removeClass(colorChoice[1] + 'Icon')
         .removeClass(iconChoice[1]);
     }
+    $('.square').removeClass('fall')
     gameboardLock = false;
   }, 1000);
   turnCounter = 1;
@@ -322,6 +324,7 @@ function resetGame(){
     if ($('.square').hasClass('red') || $('.square').hasClass('yellow')) {
       $('.square').removeClass('red');
       $('.square').removeClass('yellow');
+      $('.square').removeClass('fall')
     }
 }
 
