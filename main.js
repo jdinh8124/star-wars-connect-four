@@ -8,9 +8,15 @@ function initalizeApp(){
   $('.square').on('click', clickConnect2);
   gameStartSound.play();
   backgroundMusic.play();
+
 }
 
-
+function tieGame(){
+  if(turnCounter >= 43){
+    resetStats();
+    //insert a modal? Reset game?
+  }
+}
 
 function clickConnect2(event) {
   var currentSquareCol = $(event.currentTarget).attr("col");
@@ -26,6 +32,7 @@ function clickConnect2(event) {
       chipDropSoundRed.play()
       turnCounter += 1;
       checkConnect();
+      tieGame();
       return;
       }else {
         //yellowDrop();
@@ -33,10 +40,12 @@ function clickConnect2(event) {
       chipDropSoundYellow.play()
       turnCounter += 1;
       checkConnect();
+      tieGame();
       return;
     }
   }
 }
+
 }
 
 
