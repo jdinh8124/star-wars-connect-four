@@ -4,6 +4,7 @@ var turnCounter = 1;
 var gamesPlayed = 0;
 var player1Wins = 0;
 var player2Wins = 0;
+var gameboardLock = false;
 
 function initalizeApp(){
   createSquare();
@@ -21,7 +22,9 @@ function tieGame(){
 }
 
 function clickConnect2(event) {
-
+  if (gameboardLock){
+    return;
+  }
   var currentSquareCol = $(event.currentTarget).attr("col");
   for (var loopThroughCol = 6; loopThroughCol >= 1; loopThroughCol--) {
 
@@ -157,6 +160,7 @@ function createSquare() {
 
 
 function resetGameKeepStats(){
+  gameboardLock = true;
   addPlayerStats();
   gamesPlayed++;
   $('.player1Info').text(player1Wins);
@@ -167,7 +171,9 @@ function resetGameKeepStats(){
   if ($('.square').hasClass('red') || $('.square').hasClass('yellow')){
     $('.square').removeClass('red');
     $('.square').removeClass('yellow');
-  }}, 1000);
+  }
+    gameboardLock = false;
+  }, 1000);
   turnCounter = 1;
   gameStartSound.play()
 }
