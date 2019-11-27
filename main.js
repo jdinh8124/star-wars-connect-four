@@ -7,6 +7,7 @@ function initalizeApp(){
   createSquare();
   $('.square').on('click', clickConnect2);
   gameStartSound.play();
+  backgroundMusic.play();
 }
 
 
@@ -144,7 +145,7 @@ function resetStats(){
   turnCounter = 1;
   gameStartSound.play()
 }
-
+var backgroundMusic = new Audio("assets/John Williams - The Battle of Crait (From _Star Wars_ The Last Jedi_-Audio Only).mp3");
 var chipDropSoundRed = new Audio("assets/New Recording 7.m4a");
 var chipDropSoundYellow = new Audio("assets/New Recording 7.m4a");
 var gameStartSound= new Audio("assets/New Recording 10.m4a"); // buffers automatically when created
