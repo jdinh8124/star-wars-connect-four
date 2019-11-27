@@ -2,16 +2,31 @@ $(document).ready(initalizeApp);
 
 var turnCounter = 1;
 var gamesPlayed = 0;
+var colorAmount = 7, iconAmount = 27;
+var colorOption = ["red", "yellow", "green", "blue", "chartreuse", "hotPink", "rebeccaPurple"];
+var iconOption = [];
+var colorChoice = ["red", "yellow"];
+var iconChoice = ["icon3", "icon4"];
 var player1Wins = 0;
 var player2Wins = 0;
 var gameboardLock = false;
 
+
 function initalizeApp(){
+  var modal = $('.optionModal');
   createSquare();
   $('.square').on('click', clickConnect2);
+  $('.option.button').click(function() {
+    modal.addClass('show').removeClass('hide');
+    modalCreation(colorAmount, iconAmount);
+  });
+  $('.close').click(function() {
+    modal.removeClass('show').addClass('hide');
+    modalRemove();
+  });
+  //$('.choiceContainer').on('click', $('.choice'), playerSelect);
   gameStartSound.play();
   backgroundMusic.play();
-
 }
 
 function tieGame(){
@@ -31,9 +46,9 @@ function clickConnect2(event) {
     var searchRow = "[row=" + loopThroughCol + "]";
     var searchCol = "[col=" + currentSquareCol + "]";
     var combined = searchCol + searchRow;
-   var rowAndCol = $(combined);
-   console.log(rowAndCol)
-    if (!rowAndCol.hasClass('red') && !rowAndCol.hasClass('yellow')){
+    var rowAndCol = $(combined);
+    console.log(rowAndCol)
+    if (!rowAndCol.hasClass('red') && !rowAndCol.hasClass('yellow')) {
       if (turnCounter % 2 === 1) {
         rowAndCol.addClass('red').addClass('fall');
       chipDropSoundRed.play()
@@ -158,7 +173,6 @@ function createSquare() {
   }
 }
 
-
 function resetGameKeepStats(){
   gameboardLock = true;
   addPlayerStats();
@@ -183,6 +197,113 @@ var chipDropSoundYellow = new Audio("assets/New Recording 7.m4a");
 var gameStartSound= new Audio("assets/New Recording 10.m4a"); // buffers automatically when created
  // Use this sounds when the game starts over or resets
 
+function modalCreation(colorNum, iconNum) {
+  var colorContainer = $('.color.choiceContainer');
+  var iconContainer = $('.icon.choiceContainer');
+  for (var i = 0; i < colorNum; i++) {
+    var newDiv = $('<div>').addClass('choice').addClass(colorOption[i])
+      .attr('choice', colorOption[i]);
+    colorContainer.append(newDiv);
+  }
+  for (var i = 0; i < iconNum; i++) {
+    iconOption.push("icon" + i);
+    var newDiv2 = $('<div>').addClass('choice').addClass('iconSelectionImage')
+      .addClass(iconOption[i]).attr('choice', iconOption[i]);
+    iconContainer.append(newDiv2);
+  }
+  $('.choice').click(playerSelect);
+}
+
+function modalRemove() {
+  $('.choiceContainer > *').remove();
+  $('.choice').off(playerSelect);
+}
+
+function playerSelect(event) {
+  console.log("running playerSelect");
+  var colorDiv = $('.color > .choice');
+  var iconDiv = $('.icon > .choice');
+  var target = $(event.currentTarget);
+  if (target.hasClass('iconSelectionImage')) {
+    iconCheck(iconDiv, iconAmount, target);
+  } else {
+    iconCheck(colorDiv, colorAmount, target);
+  }
+  console.log(target);
+}
+
+function iconCheck(targetDiv, targetAmount, target) {
+  console.log("iconCheck works!");
+  for (var i = 0; i < targetAmount; i++) {
+    console.log("first for loop");
+    if ($(targetDiv[i]).hasClass('selected2')) {
+      for (var j = 0; j < targetAmount; j++) {
+        if ($(targetDiv[j]).hasClass('selected1')) {
+          if (target.hasClass('selected1')) {
+            target.removeClass('selected1');
+            if (target.hasClass('iconSelectionImage')) {
+              iconChoice[0] = "";
+            } else {
+              colorChoice[0] = "";
+            }
+          } else {
+            target.removeClass('selected2');
+            if (target.hasClass('iconSelectionImage')) {
+              iconChoice[1] = "";
+            } else {
+              colorChoice[1] = "";
+            }
+          }
+          return;
+        }
+      }
+      if (target.hasClass('selected2')) {
+        target.removeClass('selected2');
+        if (target.hasClass('iconSelectionImage')) {
+          iconChoice[1] = target.attr('choice');
+        } else {
+          colorChoice[1] = target.attr('choice');
+        }
+      } else {
+        target.addClass('selected1');
+        if (target.hasClass('iconSelectionImage')) {
+          iconChoice[0] = target.attr('choice');
+        } else {
+          colorChoice[0] = target.attr('choice');
+        }
+      }
+      return;
+    }
+  }
+  for (var i = 0; i < targetAmount; i++) {
+    console.log("second for loop");
+    if ($(targetDiv[i]).hasClass('selected1')) {
+      if (target.hasClass('selected1')) {
+        target.removeClass('selected1');
+        if (target.hasClass('iconSelectionImage')) {
+          iconChoice[0] = "";
+        } else {
+          colorChoice[0] = "";
+        }
+      } else {
+        target.addClass('selected2');
+        if (target.hasClass('iconSelectionImage')) {
+          iconChoice[1] = target.attr('choice');
+        } else {
+          colorChoice[1] = target.attr('choice');
+        }
+      }
+      return;
+    }
+  }
+  console.log("no selector found");
+  target.addClass('selected1');
+  if (target.hasClass('iconSelectionImage')) {
+    iconChoice[0] = target.attr('choice');
+  } else {
+    colorChoice[0] = target.attr('choice');
+  }
+}
 function addPlayerStats(){
   if (turnCounter % 2 === 1) {
     player1Wins++;
