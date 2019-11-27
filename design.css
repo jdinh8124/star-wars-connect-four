@@ -316,7 +316,11 @@ margin-bottom: 2px;
 
 }
 .square:hover{
-  background-color: grey;
+  background-color: #fff;
+  box-shadow:
+    0 0 40px 30px #fff,
+    0 0 80px 30px #f0f,
+    0 0 100px 60px #0ff;
 }
 
 .fall {
