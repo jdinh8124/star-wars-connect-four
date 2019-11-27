@@ -11,8 +11,12 @@ var player1Wins = 0;
 var player2Wins = 0;
 var gameboardLock = false;
 
+
+
+
 //connect the event handlers and create game board
 function initalizeApp(){
+
   var modal = $('.optionModal');
   createSquare();
   $('.square').on('click', clickConnect2);
@@ -24,15 +28,17 @@ function initalizeApp(){
     modal.removeClass('show').addClass('hide');
     modalRemove();
   });
-  $(".modalStart").on("click", function(){
+  $(".modalStart").on("click", function() {
     $(".modalStart").addClass("closeModal")
     gameStartSound.play();
     backgroundMusic.play();
   });
   $('.resetGameBoardOnly').on('click', resetGame);
   $('.resetStatsAndGame').on('click', startGameOverNoStats);
-  //$('.choiceContainer').on('click', $('.choice'), playerSelect);
+
 }
+
+
 
 //if the game board is filled, reset the game
 function tieGame(){
@@ -48,11 +54,13 @@ function clickConnect2(event) {
     return;
   }
   var currentSquareCol = $(event.currentTarget).attr("col");
+
   for (var loopThroughCol = 6; loopThroughCol >= 1; loopThroughCol--) {
     var searchRow = "[row=" + loopThroughCol + "]";
     var searchCol = "[col=" + currentSquareCol + "]";
     var combined = searchCol + searchRow;
     var rowAndCol = $(combined);
+
     if (!rowAndCol.hasClass(colorChoice[0]) && !rowAndCol.hasClass(colorChoice[1])) {
       if (turnCounter % 2 === 1) {
         rowAndCol.addClass(colorChoice[0]).addClass(colorChoice[0] + 'Icon')
@@ -70,12 +78,14 @@ function clickConnect2(event) {
         checkConnect();
         tieGame();
         return;
-      }
+       }
     }
-  }
+    }
 }
 
+
 //run checkLoop 4 times on all possible directions 4 chips can connect
+
 function checkConnect() {
   var gameSpace = $('.gamespace'), square = gameSpace.find('.square');
   checkLoop(square, 'row');
@@ -123,6 +133,7 @@ function checkLoop(square, selector) {
         }
         if (colorCounter === 4) {
           resetGameKeepStats();
+
         }
         prevColor = currentColor;
       }
@@ -131,9 +142,7 @@ function checkLoop(square, selector) {
   }
 }
 
-//DOM Creation
-//Create 42 space inside gamespace
-//Each with at least 4 tags indicating their location
+
 function createSquare() {
   var gameSpace = $('.gamespace');
   var topLeftDiaCalc = 6;
@@ -158,7 +167,7 @@ function createSquare() {
   }
 }
 
-function resetGameKeepStats(){
+function resetGameKeepStats() {
   gameboardLock = true;
   addPlayerStats();
   gamesPlayed++;
@@ -186,8 +195,7 @@ function resetGameKeepStats(){
 var backgroundMusic = new Audio("assets/John Williams - The Battle of Crait (From _Star Wars_ The Last Jedi_-Audio Only).mp3");
 var chipDropSoundRed = new Audio("assets/New Recording 7.m4a");
 var chipDropSoundYellow = new Audio("assets/New Recording 7.m4a");
-var gameStartSound= new Audio("assets/New Recording 10.m4a"); // buffers automatically when created
- // Use this sounds when the game starts over or resets
+var gameStartSound= new Audio("assets/New Recording 10.m4a");
 
  //Use DOM creation to create spots for the modal
 function modalCreation(colorNum, iconNum) {
@@ -222,8 +230,9 @@ function playerSelect(event) {
     iconCheck(iconDiv, iconAmount, target);
   } else {
     iconCheck(colorDiv, colorAmount, target);
+    }
   }
-}
+
 
 //Save player's selection on the modal
 // first click is set to be player1, second for player2
@@ -303,14 +312,17 @@ function iconCheck(targetDiv, targetAmount, target) {
       return;
     }
   }
+
+
   //if both player1 and player2 hasn't selceted anything
   // add the selection as player1's selection
+
   target.addClass('selected1');
   if (target.hasClass('iconSelectionImage')) {
     iconChoice[0] = target.attr('choice');
   } else {
     colorChoice[0] = target.attr('choice');
-  }
+    }
 }
 
 function addPlayerStats(){
@@ -321,7 +333,7 @@ function addPlayerStats(){
   }
 }
 
-function resetGame(){
+function resetGame() {
   if ($('.square').hasClass(colorChoice[0]) || $('.square').hasClass(colorChoice[1])) {
     $('.square').removeClass(colorChoice[0]).removeClass(colorChoice[0] + 'Icon')
       .removeClass(iconChoice[0]);
@@ -329,6 +341,7 @@ function resetGame(){
       .removeClass(iconChoice[1]);
   }
 }
+
 
 function startGameOverNoStats(){
   resetGame();
