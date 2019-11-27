@@ -12,6 +12,8 @@ var player2Wins = 0;
 var gameboardLock = false;
 
 function initalizeApp(){
+
+
   var modal = $('.optionModal');
   createSquare();
   $('.square').on('click', clickConnect2);
@@ -28,11 +30,12 @@ function initalizeApp(){
     gameStartSound.play();
     backgroundMusic.play();
   });
+  $('.resetGameBoardOnly').on('click', resetGame);
+  $('.resetStatsAndGame').on('click', startGameOverNoStats);
   //$('.choiceContainer').on('click', $('.choice'), playerSelect);
 
 
-  $('.resetGameButton').on('click', resetGame);
-  $('.startOverFreshButton').on('click', startGameOverNoStats);
+
 }
 
 function tieGame(){
@@ -321,12 +324,14 @@ function addPlayerStats(){
 }
 
 function resetGame(){
-    if ($('.square').hasClass('red') || $('.square').hasClass('yellow')) {
-      $('.square').removeClass('red');
-      $('.square').removeClass('yellow');
-      $('.square').removeClass('fall')
-    }
-}
+  if ($('.square').hasClass(colorChoice[0]) || $('.square').hasClass(colorChoice[1])) {
+    $('.square').removeClass(colorChoice[0]).removeClass(colorChoice[0] + 'Icon')
+      .removeClass(iconChoice[0]);
+    $('.square').removeClass(colorChoice[1]).removeClass(colorChoice[1] + 'Icon')
+      .removeClass(iconChoice[1]);
+  }
+
+
 
 
 function startGameOverNoStats(){
@@ -338,4 +343,3 @@ gamesPlayed=0;
   $('.player2Info').text(player2Wins);
   $('.gameInfo').text(gamesPlayed);
 }
-//include a tied factor. if the game ties
