@@ -11,7 +11,6 @@ var player1Wins = 0;
 var player2Wins = 0;
 var gameboardLock = false;
 
-
 function initalizeApp(){
   var modal = $('.optionModal');
   createSquare();
@@ -37,45 +36,40 @@ function tieGame(){
 }
 
 function clickConnect2(event) {
-  if (gameboardLock){
+  $('.option.button').off();
+  if (gameboardLock) {
     return;
   }
   var currentSquareCol = $(event.currentTarget).attr("col");
   for (var loopThroughCol = 6; loopThroughCol >= 1; loopThroughCol--) {
-
     var searchRow = "[row=" + loopThroughCol + "]";
     var searchCol = "[col=" + currentSquareCol + "]";
     var combined = searchCol + searchRow;
     var rowAndCol = $(combined);
     console.log(rowAndCol)
-    if (!rowAndCol.hasClass('red') && !rowAndCol.hasClass('yellow')) {
+    if (!rowAndCol.hasClass(colorChoice[0]) && !rowAndCol.hasClass(colorChoice[1])) {
       if (turnCounter % 2 === 1) {
-        rowAndCol.addClass('red').addClass('fall');
-      chipDropSoundRed.play()
-      turnCounter += 1;
-      checkConnect();
-
+        rowAndCol.addClass(colorChoice[0]).addClass(colorChoice[0] + 'Icon')
+          .addClass(iconChoice[0]).addClass('fall');
+        chipDropSoundRed.play()
+        turnCounter += 1;
+        checkConnect();
         console.log("red", turnCounter);
-
-      tieGame();
-
-      return;
-      }else {
+        tieGame();
+        return;
+      } else {
         //yellowDrop();
-        rowAndCol.addClass('yellow').addClass('fall');
-      chipDropSoundYellow.play()
-      turnCounter += 1;
-      checkConnect();
-
-      console.log("yellow", turnCounter);
-
-      tieGame();
-
-      return;
+        rowAndCol.addClass(colorChoice[1]).addClass(colorChoice[1] + 'Icon')
+          .addClass(iconChoice[1]).addClass('fall');
+        chipDropSoundYellow.play()
+        turnCounter += 1;
+        checkConnect();
+        console.log("yellow", turnCounter);
+        tieGame();
+        return;
+      }
     }
   }
-}
-
 }
 
 
@@ -117,10 +111,10 @@ function checkLoop(square, selector) {
       //console.log("current value: " + $(square[j]).attr(selector) + ", " + i);
       if (parseInt($(square[j]).attr(selector)) === i+1) {
         //console.log("matched! " + selector);
-        if ($(square[j]).hasClass('red')) {
-          currentColor = 'red';
-        } else if ($(square[j]).hasClass('yellow')) {
-          currentColor = 'yellow';
+        if ($(square[j]).hasClass(colorChoice[0])) {
+          currentColor = colorChoice[0];
+        } else if ($(square[j]).hasClass(colorChoice[1])) {
+          currentColor = colorChoice[1];
         } else {
           currentColor = 'empty';
         }
@@ -181,15 +175,21 @@ function resetGameKeepStats(){
   $('.player2Info').text(player2Wins);
   $('.gameInfo').text(gamesPlayed);
 
-  setTimeout(function() {
-  if ($('.square').hasClass('red') || $('.square').hasClass('yellow')){
-    $('.square').removeClass('red');
-    $('.square').removeClass('yellow');
-  }
+  setTimeout(function () {
+    if ($('.square').hasClass(colorChoice[0]) || $('.square').hasClass(colorChoice[1])) {
+      $('.square').removeClass(colorChoice[0]).removeClass(colorChoice[0] + 'Icon')
+        .removeClass(iconChoice[0]);
+      $('.square').removeClass(colorChoice[1]).removeClass(colorChoice[1] + 'Icon')
+        .removeClass(iconChoice[1]);
+    }
     gameboardLock = false;
   }, 1000);
   turnCounter = 1;
-  gameStartSound.play()
+  $('.option.button').click(function () {
+    $('.optionModal').addClass('show').removeClass('hide');
+    modalCreation(colorAmount, iconAmount);
+  });
+  gameStartSound.play();
 }
 var backgroundMusic = new Audio("assets/John Williams - The Battle of Crait (From _Star Wars_ The Last Jedi_-Audio Only).mp3");
 var chipDropSoundRed = new Audio("assets/New Recording 7.m4a");
@@ -305,7 +305,7 @@ function iconCheck(targetDiv, targetAmount, target) {
   }
 }
 function addPlayerStats(){
-  if (turnCounter % 2 === 1) {
+  if (turnCounter % 2 === 0) {
     player1Wins++;
   } else {
     player2Wins++;
