@@ -331,7 +331,7 @@ function resetGame(){
       .removeClass(iconChoice[1]);
   }
 
-
+}
 
 
 function startGameOverNoStats(){
