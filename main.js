@@ -25,10 +25,11 @@ function initalizeApp(){
   });
   $(".modalStart").on("click", function(){
     $(".modalStart").addClass("closeModal")
+    gameStartSound.play();
+    backgroundMusic.play();
   });
   //$('.choiceContainer').on('click', $('.choice'), playerSelect);
-  gameStartSound.play();
-  backgroundMusic.play();
+
 
   $('.resetGameButton').on('click', resetGame);
   $('.startOverFreshButton').on('click', startGameOverNoStats);
