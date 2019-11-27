@@ -2,6 +2,8 @@ $(document).ready(initalizeApp);
 
 var turnCounter = 1;
 var gamesPlayed = 0;
+var player1Wins = 0;
+var player2Wins = 0;
 
 function initalizeApp(){
   createSquare();
@@ -23,8 +25,10 @@ function initalizeApp(){
 // }
 
 function clickConnect2(event) {
+
   var currentSquareCol = $(event.currentTarget).attr("col");
   for (var loopThroughCol = 6; loopThroughCol >= 1; loopThroughCol--) {
+
     var searchRow = "[row=" + loopThroughCol + "]";
     var searchCol = "[col=" + currentSquareCol + "]";
     var combined = searchCol + searchRow;
@@ -35,15 +39,18 @@ function clickConnect2(event) {
       rowAndCol.addClass('red');
       turnCounter += 1;
       checkConnect();
+        console.log("red", turnCounter);
       return;
       }else {
       rowAndCol.addClass('yellow');
       turnCounter += 1;
       checkConnect();
+      console.log("yellow", turnCounter);
       return;
     }
   }
 }
+
 }
 
 //check if there are consecutive 4 chips on the game board
@@ -67,7 +74,7 @@ function checkConnect() {
 }
 
 function checkLoop(square, selector) {
-  //debugger;
+
   var colorCounter = null, loopCount = null, currentColor = null, prevColor = null;
   if (selector === 'row') {
     loopCount = 6;
@@ -98,7 +105,8 @@ function checkLoop(square, selector) {
           colorCounter++;
         }
         if (colorCounter === 4) {
-          resetStats();
+          resetGameKeepStats();
+
           //win condition
           console.log("you won the game!");
         }
@@ -139,9 +147,13 @@ function createSquare() {
 }
 
 
-function resetStats(){
+function resetGameKeepStats(){
+  addPlayerStats();
   gamesPlayed++;
+  $('.player1Info').text(player1Wins);
+  $('.player2Info').text(player2Wins);
   $('.gameInfo').text(gamesPlayed);
+
   setTimeout(function() {
   if ($('.square').hasClass('red') || $('.square').hasClass('yellow')){
     $('.square').removeClass('red');
@@ -150,5 +162,21 @@ function resetStats(){
   turnCounter = 1;
 }
 
+function addPlayerStats(){
+  if (turnCounter % 2 === 1) {
+    player1Wins++;
+  } else {
+    player2Wins++;
+  }
+}
+
+// function resetGameAndStats(){
+//   setTimeout(function () {
+//     if ($('.square').hasClass('red') || $('.square').hasClass('yellow')) {
+//       $('.square').removeClass('red');
+//       $('.square').removeClass('yellow');
+//     }
+//   }, 1000);
+// }
 
 //include a tied factor. if the game ties
