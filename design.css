@@ -133,16 +133,16 @@ margin-bottom: 2px;
   align-items: flex-start;
 }
 #optionModal {
-  background-color: cadetblue;
-  z-index: 1;
-  width: 120%;
-  height: 100%;
-  position: absolute;
-  right: 0;
-  top: 0;
-  flex-direction: column;
-  overflow-y: scroll;
-  overflow-x: hidden;
+    background-color: cadetblue;
+    z-index: 1;
+    width: 10%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    left: 0;
 }
 .choiceContainer {
   flex-wrap: wrap;
@@ -334,24 +334,34 @@ margin-bottom: 2px;
 }
 
 
+.allButtons{
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 
 button {
-
-  padding: 15px 25px;
-  font-size: 24px;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  color: #fff;
-  background-color: rgb(228, 228, 42);
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px #999;
-  height: fit-content;
-  flex-direction: column;
-  color: #3e8e41;
-  font-family: 'Orbitron', sans-serif;
+    margin: auto;
+    margin-right: 5%;
+    display: block;
+    padding: 10px 18px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    background-color: rgb(228, 228, 42);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    height: auto;
+    flex-direction: column;
+    color: #3e8e41;
+    font-family: 'Orbitron', sans-serif;
+    height: 8vh;
+    width: 18vmin;
+    font-size: x-large;
 }
+
 
 button:hover {background-color: #c7d690}
 

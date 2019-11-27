@@ -42,11 +42,25 @@
 
 </div>
 
-<header class="header">May the Fourth Connect Be With You</header>
+
 
 <div class="gameAndStats">
-  <button class="resetGameButton">Reset Game</button>
-  <button class="startOverFreshButton">Start Over</button>
+  <div class="allButtons">
+    <button class="option button">Player Options</button>
+    <div id="optionModal" class="optionModal hide">
+      <span class="close">&times;</span>
+      <div class="modalContent color">
+        <span class="color modalTitle">Color</span>
+        <div class="color choiceContainer"></div>
+      </div>
+      <div class="modalContent icon">
+        <span class="icon modalTitle">Icon</span>
+        <div class="icon choiceContainer"></div>
+      </div>
+    </div>
+  <button class="resetGameBoardOnly">Clear Board</button>
+  <button class="resetStatsAndGame">Reset Stats</button>
+        </div>
   <div class="gamespace">
   </div>
   <aside class="stats">
@@ -59,19 +73,7 @@
     <div class="gameInfoTitle">Games Played</div>
     <div class="gameInfo">0</div>
     <div class="optionContainer">
-      <button class="option button">Do. or do not. There is no try.</button>
-      <div id="optionModal" class="optionModal hide">
-        <span class="close">&times;</span>
-        <div class="modalContent color">
-          <span class="color modalTitle">Color</span>
-          <div class="color choiceContainer"></div>
         </div>
-        <div class="modalContent icon">
-          <span class="icon modalTitle">Icon</span>
-          <div class="icon choiceContainer"></div>
-        </div>
-      </div>
-    </div>
   </aside>
 </div>
 </body>
