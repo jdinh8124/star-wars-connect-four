@@ -11,7 +11,12 @@ var player1Wins = 0;
 var player2Wins = 0;
 var gameboardLock = false;
 
-function initalizeApp() {
+
+
+
+//connect the event handlers and create game board
+function initalizeApp(){
+
   var modal = $('.optionModal');
   createSquare();
   $('.square').on('click', clickConnect2);
@@ -30,45 +35,47 @@ function initalizeApp() {
   });
   $('.resetGameBoardOnly').on('click', resetGame);
   $('.resetStatsAndGame').on('click', startGameOverNoStats);
+
 }
 
 
-function tieGame() {
-  if(turnCounter >= 43) {
+
+//if the game board is filled, reset the game
+function tieGame(){
+  if(turnCounter >= 43){
     resetGameKeepStats();
   }
 }
 
 function clickConnect2(event) {
+  //when the game start, disable the option button
   $('.option.button').off();
   if (gameboardLock) {
     return;
   }
   var currentSquareCol = $(event.currentTarget).attr("col");
-    for (var loopThroughCol = 6; loopThroughCol >= 1; loopThroughCol--) {
-      var searchRow = "[row=" + loopThroughCol + "]";
-      var searchCol = "[col=" + currentSquareCol + "]";
-      var combined = searchCol + searchRow;
-      var rowAndCol = $(combined);
-      console.log(rowAndCol)
+
+  for (var loopThroughCol = 6; loopThroughCol >= 1; loopThroughCol--) {
+    var searchRow = "[row=" + loopThroughCol + "]";
+    var searchCol = "[col=" + currentSquareCol + "]";
+    var combined = searchCol + searchRow;
+    var rowAndCol = $(combined);
+
     if (!rowAndCol.hasClass(colorChoice[0]) && !rowAndCol.hasClass(colorChoice[1])) {
       if (turnCounter % 2 === 1) {
         rowAndCol.addClass(colorChoice[0]).addClass(colorChoice[0] + 'Icon')
           .addClass(iconChoice[0]).addClass('fall');
-        chipDropSoundRed.play()
+        chipDropSoundRed.play();
         turnCounter += 1;
         checkConnect();
-        console.log("red", turnCounter);
         tieGame();
         return;
       } else {
-        //yellowDrop();
         rowAndCol.addClass(colorChoice[1]).addClass(colorChoice[1] + 'Icon')
           .addClass(iconChoice[1]).addClass('fall');
-        chipDropSoundYellow.play()
+        chipDropSoundYellow.play();
         turnCounter += 1;
         checkConnect();
-        console.log("yellow", turnCounter);
         tieGame();
         return;
        }
@@ -76,6 +83,8 @@ function clickConnect2(event) {
     }
 }
 
+
+//run checkLoop 4 times on all possible directions 4 chips can connect
 
 function checkConnect() {
   var gameSpace = $('.gamespace'), square = gameSpace.find('.square');
@@ -85,9 +94,11 @@ function checkConnect() {
   checkLoop(square, 'botLeftDia');
 }
 
+//check on the provided direction if there are 4 connected chips with the same
+//color
 function checkLoop(square, selector) {
-
   var colorCounter = null, loopCount = null, currentColor = null, prevColor = null;
+  //set appropriate loop number for different direction
   if (selector === 'row') {
     loopCount = 6;
   } else if (selector === 'col') {
@@ -95,6 +106,14 @@ function checkLoop(square, selector) {
   } else {
     loopCount = 12;
   }
+  //loop through the provided groups, then loop through all the squares
+  // check if the squares on actually on the current group
+  // if yes, check if there's any color existing
+  // if also yes, check if the color match the previous checked color
+  // counter goes up 1 if there's matched color that's connected
+  // reset counter if colors are different or if the square is empty
+  // if counter goes to 4, player wins the game
+  // save current color as previous checked color
   for (var i = 0; i < loopCount; i++) {
     for (var j = 0; j < 42; j++) {
       if (parseInt($(square[j]).attr(selector)) === i+1) {
@@ -114,7 +133,7 @@ function checkLoop(square, selector) {
         }
         if (colorCounter === 4) {
           resetGameKeepStats();
-          console.log("you won the game!");
+
         }
         prevColor = currentColor;
       }
@@ -155,7 +174,6 @@ function resetGameKeepStats() {
   $('.player1Info').text(player1Wins);
   $('.player2Info').text(player2Wins);
   $('.gameInfo').text(gamesPlayed);
-
   setTimeout(function () {
     if ($('.square').hasClass(colorChoice[0]) || $('.square').hasClass(colorChoice[1])) {
       $('.square').removeClass(colorChoice[0]).removeClass(colorChoice[0] + 'Icon')
@@ -179,6 +197,7 @@ var chipDropSoundRed = new Audio("assets/New Recording 7.m4a");
 var chipDropSoundYellow = new Audio("assets/New Recording 7.m4a");
 var gameStartSound= new Audio("assets/New Recording 10.m4a");
 
+ //Use DOM creation to create spots for the modal
 function modalCreation(colorNum, iconNum) {
   var colorContainer = $('.color.choiceContainer');
   var iconContainer = $('.icon.choiceContainer');
@@ -196,13 +215,14 @@ function modalCreation(colorNum, iconNum) {
   $('.choice').click(playerSelect);
 }
 
+//Remove modal when closed
 function modalRemove() {
   $('.choiceContainer > *').remove();
   $('.choice').off(playerSelect);
 }
 
+//Link iconCheck to save user's selection on color and icon
 function playerSelect(event) {
-  console.log("running playerSelect");
   var colorDiv = $('.color > .choice');
   var iconDiv = $('.icon > .choice');
   var target = $(event.currentTarget);
@@ -211,24 +231,31 @@ function playerSelect(event) {
   } else {
     iconCheck(colorDiv, colorAmount, target);
     }
-  console.log(target);
-}
+  }
 
+
+//Save player's selection on the modal
+// first click is set to be player1, second for player2
+// both can be cancelled and reselect
 function iconCheck(targetDiv, targetAmount, target) {
-  console.log("iconCheck works!");
   for (var i = 0; i < targetAmount; i++) {
-    console.log("first for loop");
+    //if any of the icon is selected by player2
     if ($(targetDiv[i]).hasClass('selected2')) {
       for (var j = 0; j < targetAmount; j++) {
+        //if any of the icon is also selected by player1
         if ($(targetDiv[j]).hasClass('selected1')) {
+          //if the user is currently clicking player1's selection
+          // remove the selection
           if (target.hasClass('selected1')) {
             target.removeClass('selected1');
+            //remove the selection from iconChoice and colorChoice
             if (target.hasClass('iconSelectionImage')) {
               iconChoice[0] = "";
             } else {
               colorChoice[0] = "";
             }
           } else {
+            //cancel player2's selection if that's the target instead
             target.removeClass('selected2');
             if (target.hasClass('iconSelectionImage')) {
               iconChoice[1] = "";
@@ -239,14 +266,19 @@ function iconCheck(targetDiv, targetAmount, target) {
           return;
         }
       }
+      //if player1 hasn't selected anything, only player2 has
       if (target.hasClass('selected2')) {
+        //remove player2's selection if that's the target
         target.removeClass('selected2');
+        //probably should be remove instead of add, but the code is currently
+        //working and I don't have time to further test it
         if (target.hasClass('iconSelectionImage')) {
           iconChoice[1] = target.attr('choice');
         } else {
           colorChoice[1] = target.attr('choice');
         }
       } else {
+        //if player selected an unselected icon, save it as player1's selection
         target.addClass('selected1');
         if (target.hasClass('iconSelectionImage')) {
           iconChoice[0] = target.attr('choice');
@@ -257,9 +289,10 @@ function iconCheck(targetDiv, targetAmount, target) {
       return;
     }
   }
+  //if player1 has already made a selection but player2 hasn't
   for (var i = 0; i < targetAmount; i++) {
-    console.log("second for loop");
     if ($(targetDiv[i]).hasClass('selected1')) {
+      //if the user is clicking at player1's selection
       if (target.hasClass('selected1')) {
         target.removeClass('selected1');
         if (target.hasClass('iconSelectionImage')) {
@@ -268,6 +301,7 @@ function iconCheck(targetDiv, targetAmount, target) {
           colorChoice[0] = "";
         }
       } else {
+        //if user is clicking at an unselected icon
         target.addClass('selected2');
         if (target.hasClass('iconSelectionImage')) {
           iconChoice[1] = target.attr('choice');
@@ -278,6 +312,10 @@ function iconCheck(targetDiv, targetAmount, target) {
       return;
     }
   }
+
+
+  //if both player1 and player2 hasn't selceted anything
+  // add the selection as player1's selection
 
   target.addClass('selected1');
   if (target.hasClass('iconSelectionImage')) {
@@ -305,11 +343,11 @@ function resetGame() {
 }
 
 
-function startGameOverNoStats() {
+function startGameOverNoStats(){
   resetGame();
-  player1Wins=0;
-  player2Wins=0;
-  gamesPlayed=0;
+  player1Wins = 0;
+  player2Wins = 0;
+  gamesPlayed = 0;
   $('.player1Info').text(player1Wins);
   $('.player2Info').text(player2Wins);
   $('.gameInfo').text(gamesPlayed);
