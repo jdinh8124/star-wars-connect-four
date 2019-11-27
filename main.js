@@ -11,9 +11,7 @@ var player1Wins = 0;
 var player2Wins = 0;
 var gameboardLock = false;
 
-function initalizeApp(){
-
-
+function initalizeApp() {
   var modal = $('.optionModal');
   createSquare();
   $('.square').on('click', clickConnect2);
@@ -25,23 +23,19 @@ function initalizeApp(){
     modal.removeClass('show').addClass('hide');
     modalRemove();
   });
-  $(".modalStart").on("click", function(){
+  $(".modalStart").on("click", function() {
     $(".modalStart").addClass("closeModal")
     gameStartSound.play();
     backgroundMusic.play();
   });
   $('.resetGameBoardOnly').on('click', resetGame);
   $('.resetStatsAndGame').on('click', startGameOverNoStats);
-  //$('.choiceContainer').on('click', $('.choice'), playerSelect);
-
-
-
 }
 
-function tieGame(){
-  if(turnCounter >= 43){
+
+function tieGame() {
+  if(turnCounter >= 43) {
     resetGameKeepStats();
-    //insert a modal? Reset game?
   }
 }
 
@@ -51,12 +45,12 @@ function clickConnect2(event) {
     return;
   }
   var currentSquareCol = $(event.currentTarget).attr("col");
-  for (var loopThroughCol = 6; loopThroughCol >= 1; loopThroughCol--) {
-    var searchRow = "[row=" + loopThroughCol + "]";
-    var searchCol = "[col=" + currentSquareCol + "]";
-    var combined = searchCol + searchRow;
-    var rowAndCol = $(combined);
-    console.log(rowAndCol)
+    for (var loopThroughCol = 6; loopThroughCol >= 1; loopThroughCol--) {
+      var searchRow = "[row=" + loopThroughCol + "]";
+      var searchCol = "[col=" + currentSquareCol + "]";
+      var combined = searchCol + searchRow;
+      var rowAndCol = $(combined);
+      console.log(rowAndCol)
     if (!rowAndCol.hasClass(colorChoice[0]) && !rowAndCol.hasClass(colorChoice[1])) {
       if (turnCounter % 2 === 1) {
         rowAndCol.addClass(colorChoice[0]).addClass(colorChoice[0] + 'Icon')
@@ -77,26 +71,13 @@ function clickConnect2(event) {
         console.log("yellow", turnCounter);
         tieGame();
         return;
-      }
+       }
     }
-  }
+    }
 }
 
 
-
-//check if there are consecutive 4 chips on the game board
-//variables: 4 counters that goes up 1 individually when there are consecutive
-
-//same color on their respective direction: vertical, horizontal, 2 diagnal
-//directions; 4 variables that stores previous direction color
-//do 1 loops for game board size
-//in the loop, search for classes indicating each direction
-//if the class shows up is the same as the previous one, counter goes up 1
-//if the class is different from the previous class, counter reset to 0
-//if counter goes to 4, call game winning function and exit the code block
 function checkConnect() {
-  // var rowColorCounter = null, colColorCoutner = null,
-  //   topLeftDiaColorCounter = null, botLeftDiaColorCounter = null;
   var gameSpace = $('.gamespace'), square = gameSpace.find('.square');
   checkLoop(square, 'row');
   checkLoop(square, 'col');
@@ -116,11 +97,7 @@ function checkLoop(square, selector) {
   }
   for (var i = 0; i < loopCount; i++) {
     for (var j = 0; j < 42; j++) {
-      //console.log("current square: ", $(square[j]));
-      //console.log("current selector: ", selector );
-      //console.log("current value: " + $(square[j]).attr(selector) + ", " + i);
       if (parseInt($(square[j]).attr(selector)) === i+1) {
-        //console.log("matched! " + selector);
         if ($(square[j]).hasClass(colorChoice[0])) {
           currentColor = colorChoice[0];
         } else if ($(square[j]).hasClass(colorChoice[1])) {
@@ -137,22 +114,16 @@ function checkLoop(square, selector) {
         }
         if (colorCounter === 4) {
           resetGameKeepStats();
-
-          //win condition
           console.log("you won the game!");
         }
-        //console.log("currentColor: " + currentColor + ", " + colorCounter);
         prevColor = currentColor;
       }
     }
-    //console.log("colorCounter: ", colorCounter);
     colorCounter = 0;
   }
 }
 
-//DOM Creation
-//Create 42 space inside gamespace
-//Each with at least 4 tags indicating their location
+
 function createSquare() {
   var gameSpace = $('.gamespace');
   var topLeftDiaCalc = 6;
@@ -177,7 +148,7 @@ function createSquare() {
   }
 }
 
-function resetGameKeepStats(){
+function resetGameKeepStats() {
   gameboardLock = true;
   addPlayerStats();
   gamesPlayed++;
@@ -202,11 +173,11 @@ function resetGameKeepStats(){
   });
   gameStartSound.play();
 }
+
 var backgroundMusic = new Audio("assets/John Williams - The Battle of Crait (From _Star Wars_ The Last Jedi_-Audio Only).mp3");
 var chipDropSoundRed = new Audio("assets/New Recording 7.m4a");
 var chipDropSoundYellow = new Audio("assets/New Recording 7.m4a");
-var gameStartSound= new Audio("assets/New Recording 10.m4a"); // buffers automatically when created
- // Use this sounds when the game starts over or resets
+var gameStartSound= new Audio("assets/New Recording 10.m4a");
 
 function modalCreation(colorNum, iconNum) {
   var colorContainer = $('.color.choiceContainer');
@@ -239,7 +210,7 @@ function playerSelect(event) {
     iconCheck(iconDiv, iconAmount, target);
   } else {
     iconCheck(colorDiv, colorAmount, target);
-  }
+    }
   console.log(target);
 }
 
@@ -307,14 +278,15 @@ function iconCheck(targetDiv, targetAmount, target) {
       return;
     }
   }
-  console.log("no selector found");
+
   target.addClass('selected1');
   if (target.hasClass('iconSelectionImage')) {
     iconChoice[0] = target.attr('choice');
   } else {
     colorChoice[0] = target.attr('choice');
-  }
+    }
 }
+
 function addPlayerStats(){
   if (turnCounter % 2 === 0) {
     player1Wins++;
@@ -323,22 +295,21 @@ function addPlayerStats(){
   }
 }
 
-function resetGame(){
+function resetGame() {
   if ($('.square').hasClass(colorChoice[0]) || $('.square').hasClass(colorChoice[1])) {
     $('.square').removeClass(colorChoice[0]).removeClass(colorChoice[0] + 'Icon')
       .removeClass(iconChoice[0]);
     $('.square').removeClass(colorChoice[1]).removeClass(colorChoice[1] + 'Icon')
       .removeClass(iconChoice[1]);
   }
-
 }
 
 
-function startGameOverNoStats(){
-resetGame();
-player1Wins=0;
-player2Wins=0;
-gamesPlayed=0;
+function startGameOverNoStats() {
+  resetGame();
+  player1Wins=0;
+  player2Wins=0;
+  gamesPlayed=0;
   $('.player1Info').text(player1Wins);
   $('.player2Info').text(player2Wins);
   $('.gameInfo').text(gamesPlayed);
