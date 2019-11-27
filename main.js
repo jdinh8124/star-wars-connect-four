@@ -330,7 +330,7 @@ function resetGame(){
     $('.square').removeClass(colorChoice[1]).removeClass(colorChoice[1] + 'Icon')
       .removeClass(iconChoice[1]);
   }
-
+}
 
 
 
