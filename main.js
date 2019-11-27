@@ -7,6 +7,10 @@ var colorOption = ["red", "yellow", "green", "blue", "chartreuse", "hotPink", "r
 var iconOption = [];
 var colorChoice = ["red", "yellow"];
 var iconChoice = ["icon3", "icon4"];
+var player1Wins = 0;
+var player2Wins = 0;
+var gameboardLock = false;
+
 
 function initalizeApp(){
   var modal = $('.optionModal');
@@ -21,25 +25,24 @@ function initalizeApp(){
     modalRemove();
   });
   //$('.choiceContainer').on('click', $('.choice'), playerSelect);
+  gameStartSound.play();
+  backgroundMusic.play();
 }
 
-//when you click on a square, you want to add a class of
-// function clickConnect (event){
-//   var currentSquare = $(event.currentTarget);
-//   if (!currentSquare.hasClass('red') && !currentSquare.hasClass('yellow')) {
-//     if (turnCounter % 2 === 1) {
-//       currentSquare.addClass('red');
-//     } else {
-//       currentSquare.addClass('yellow');
-//     }
-//     turnCounter += 1;
-//   }
-//   checkConnect();
-// }
+function tieGame(){
+  if(turnCounter >= 43){
+    resetGameKeepStats();
+    //insert a modal? Reset game?
+  }
+}
 
 function clickConnect2(event) {
+  if (gameboardLock){
+    return;
+  }
   var currentSquareCol = $(event.currentTarget).attr("col");
   for (var loopThroughCol = 6; loopThroughCol >= 1; loopThroughCol--) {
+
     var searchRow = "[row=" + loopThroughCol + "]";
     var searchCol = "[col=" + currentSquareCol + "]";
     var combined = searchCol + searchRow;
@@ -47,19 +50,35 @@ function clickConnect2(event) {
     console.log(rowAndCol)
     if (!rowAndCol.hasClass('red') && !rowAndCol.hasClass('yellow')) {
       if (turnCounter % 2 === 1) {
-        rowAndCol.addClass('red');
-        turnCounter += 1;
-        checkConnect();
-        return;
-      } else {
-        rowAndCol.addClass('yellow');
-        turnCounter += 1;
-        checkConnect();
-        return;
-      }
+        rowAndCol.addClass('red').addClass('fall');
+      chipDropSoundRed.play()
+      turnCounter += 1;
+      checkConnect();
+
+        console.log("red", turnCounter);
+
+      tieGame();
+
+      return;
+      }else {
+        //yellowDrop();
+        rowAndCol.addClass('yellow').addClass('fall');
+      chipDropSoundYellow.play()
+      turnCounter += 1;
+      checkConnect();
+
+      console.log("yellow", turnCounter);
+
+      tieGame();
+
+      return;
     }
   }
 }
+
+}
+
+
 
 //check if there are consecutive 4 chips on the game board
 //variables: 4 counters that goes up 1 individually when there are consecutive
@@ -82,7 +101,7 @@ function checkConnect() {
 }
 
 function checkLoop(square, selector) {
-  //debugger;
+
   var colorCounter = null, loopCount = null, currentColor = null, prevColor = null;
   if (selector === 'row') {
     loopCount = 6;
@@ -113,7 +132,8 @@ function checkLoop(square, selector) {
           colorCounter++;
         }
         if (colorCounter === 4) {
-          resetStats();
+          resetGameKeepStats();
+
           //win condition
           console.log("you won the game!");
         }
@@ -153,16 +173,29 @@ function createSquare() {
   }
 }
 
-function resetStats(){
+function resetGameKeepStats(){
+  gameboardLock = true;
+  addPlayerStats();
   gamesPlayed++;
+  $('.player1Info').text(player1Wins);
+  $('.player2Info').text(player2Wins);
   $('.gameInfo').text(gamesPlayed);
+
   setTimeout(function() {
   if ($('.square').hasClass('red') || $('.square').hasClass('yellow')){
     $('.square').removeClass('red');
     $('.square').removeClass('yellow');
-  }}, 1000);
+  }
+    gameboardLock = false;
+  }, 1000);
   turnCounter = 1;
+  gameStartSound.play()
 }
+var backgroundMusic = new Audio("assets/John Williams - The Battle of Crait (From _Star Wars_ The Last Jedi_-Audio Only).mp3");
+var chipDropSoundRed = new Audio("assets/New Recording 7.m4a");
+var chipDropSoundYellow = new Audio("assets/New Recording 7.m4a");
+var gameStartSound= new Audio("assets/New Recording 10.m4a"); // buffers automatically when created
+ // Use this sounds when the game starts over or resets
 
 function modalCreation(colorNum, iconNum) {
   var colorContainer = $('.color.choiceContainer');
@@ -271,5 +304,21 @@ function iconCheck(targetDiv, targetAmount, target) {
     colorChoice[0] = target.attr('choice');
   }
 }
+function addPlayerStats(){
+  if (turnCounter % 2 === 1) {
+    player1Wins++;
+  } else {
+    player2Wins++;
+  }
+}
+
+// function resetGameAndStats(){
+//   setTimeout(function () {
+//     if ($('.square').hasClass('red') || $('.square').hasClass('yellow')) {
+//       $('.square').removeClass('red');
+//       $('.square').removeClass('yellow');
+//     }
+//   }, 1000);
+// }
 
 //include a tied factor. if the game ties
