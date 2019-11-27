@@ -8,21 +8,17 @@ var player2Wins = 0;
 function initalizeApp(){
   createSquare();
   $('.square').on('click', clickConnect2);
+  gameStartSound.play();
+  backgroundMusic.play();
+
 }
 
-//when you click on a square, you want to add a class of
-// function clickConnect (event){
-//   var currentSquare = $(event.currentTarget);
-//   if (!currentSquare.hasClass('red') && !currentSquare.hasClass('yellow')) {
-//     if (turnCounter % 2 === 1) {
-//       currentSquare.addClass('red');
-//     } else {
-//       currentSquare.addClass('yellow');
-//     }
-//     turnCounter += 1;
-//   }
-//   checkConnect();
-// }
+function tieGame(){
+  if(turnCounter >= 43){
+    resetStats();
+    //insert a modal? Reset game?
+  }
+}
 
 function clickConnect2(event) {
 
@@ -36,22 +32,35 @@ function clickConnect2(event) {
    console.log(rowAndCol)
     if (!rowAndCol.hasClass('red') && !rowAndCol.hasClass('yellow')){
       if (turnCounter % 2 === 1) {
-      rowAndCol.addClass('red');
+        rowAndCol.addClass('red').addClass('fall');
+      chipDropSoundRed.play()
       turnCounter += 1;
       checkConnect();
+
         console.log("red", turnCounter);
+
+      tieGame();
+
       return;
       }else {
-      rowAndCol.addClass('yellow');
+        //yellowDrop();
+        rowAndCol.addClass('yellow').addClass('fall');
+      chipDropSoundYellow.play()
       turnCounter += 1;
       checkConnect();
+
       console.log("yellow", turnCounter);
+
+      tieGame();
+
       return;
     }
   }
 }
 
 }
+
+
 
 //check if there are consecutive 4 chips on the game board
 //variables: 4 counters that goes up 1 individually when there are consecutive
@@ -160,7 +169,13 @@ function resetGameKeepStats(){
     $('.square').removeClass('yellow');
   }}, 1000);
   turnCounter = 1;
+  gameStartSound.play()
 }
+var backgroundMusic = new Audio("assets/John Williams - The Battle of Crait (From _Star Wars_ The Last Jedi_-Audio Only).mp3");
+var chipDropSoundRed = new Audio("assets/New Recording 7.m4a");
+var chipDropSoundYellow = new Audio("assets/New Recording 7.m4a");
+var gameStartSound= new Audio("assets/New Recording 10.m4a"); // buffers automatically when created
+ // Use this sounds when the game starts over or resets
 
 function addPlayerStats(){
   if (turnCounter % 2 === 1) {
