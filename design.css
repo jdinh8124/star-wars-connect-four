@@ -80,6 +80,7 @@ margin-bottom: 2px;
 .col:hover {
   -webkit-transform: scale(1.08, 1.08);
   transform: scale(1.08, 1.08);
+
 }
 .square:hover{
   background-color: grey;
@@ -92,7 +93,7 @@ margin-bottom: 2px;
 
 @keyframes fall-animation {
     from {
-        transform: translateY(-800px);
+        transform: translateY(-500px);
     }
     to {
         transform: translateY(0);
