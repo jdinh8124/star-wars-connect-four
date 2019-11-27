@@ -1,12 +1,9 @@
 
 body{
-
-
   background: url("http://wallpapercave.com/wp/pEeUsp1.jpg");
-
-
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: cover;
+  overflow: hidden;
 }
 
 header{
@@ -470,11 +467,13 @@ h1
 
 h1 sub
 {
+  text-align: center;
+  top: 5%;
 	display: block;
 	font-size: 0.3em;
 	letter-spacing: 0;
   line-height: 0.8em;
-  left: 5%;
+  left: 25%;
 }
 
 @-webkit-keyframes logo {
