@@ -158,6 +158,27 @@ margin-bottom: 2px;
 .iconSelectionImage {
   background: url(/image/star_wars_icon.jpg) no-repeat;
 }
+.redIcon {
+  background: url(/image/star_wars_icon_red.png) no-repeat;
+}
+.yellowIcon {
+  background: url(/image/star_wars_icon_yellow.png) no-repeat;
+}
+.blueIcon {
+  background: url(/image/star_wars_icon_blue.png) no-repeat;
+}
+.greenIcon {
+  background: url(/image/star_wars_icon_green.png) no-repeat;
+}
+.chartreuseIcon {
+  background: url(/image/star_wars_icon_chartreuse.png) no-repeat;
+}
+.hotPinkIcon {
+  background: url(/image/star_wars_icon_hotPink.png) no-repeat;
+}
+.rebeccaPurpleIcon {
+  background: url(/image/star_wars_icon_rebeccaPurple.png) no-repeat;
+}
 .icon0 {
   background-size: 1000% 800%;
   background-position: 5% 19.5%;
