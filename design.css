@@ -321,12 +321,12 @@ margin-bottom: 2px;
 
 .fall {
     animation-name: fall-animation;
-    animation-duration: 150ms;
+    animation-duration: 250ms;
 }
 
 @keyframes fall-animation {
     from {
-        transform: translateY(-500px);
+        transform: translateY(-600px);
     }
     to {
         transform: translateY(0);
