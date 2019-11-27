@@ -72,3 +72,29 @@ margin-bottom: 2px;
 .yellow{
   background-color: yellow;
 }
+
+.col {
+  -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.col:hover {
+  -webkit-transform: scale(1.08, 1.08);
+  transform: scale(1.08, 1.08);
+}
+.square:hover{
+  background-color: grey;
+}
+
+.fall {
+    animation-name: fall-animation;
+    animation-duration: 120ms;
+}
+
+@keyframes fall-animation {
+    from {
+        transform: translateY(-800px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}

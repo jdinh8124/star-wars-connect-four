@@ -6,21 +6,10 @@ var gamesPlayed = 0;
 function initalizeApp(){
   createSquare();
   $('.square').on('click', clickConnect2);
+  gameStartSound.play();
 }
 
-//when you click on a square, you want to add a class of
-// function clickConnect (event){
-//   var currentSquare = $(event.currentTarget);
-//   if (!currentSquare.hasClass('red') && !currentSquare.hasClass('yellow')) {
-//     if (turnCounter % 2 === 1) {
-//       currentSquare.addClass('red');
-//     } else {
-//       currentSquare.addClass('yellow');
-//     }
-//     turnCounter += 1;
-//   }
-//   checkConnect();
-// }
+
 
 function clickConnect2(event) {
   var currentSquareCol = $(event.currentTarget).attr("col");
@@ -32,12 +21,15 @@ function clickConnect2(event) {
    console.log(rowAndCol)
     if (!rowAndCol.hasClass('red') && !rowAndCol.hasClass('yellow')){
       if (turnCounter % 2 === 1) {
-      rowAndCol.addClass('red');
+        rowAndCol.addClass('red').addClass('fall');
+      chipDropSoundRed.play()
       turnCounter += 1;
       checkConnect();
       return;
       }else {
-      rowAndCol.addClass('yellow');
+        //yellowDrop();
+        rowAndCol.addClass('yellow').addClass('fall');
+      chipDropSoundYellow.play()
       turnCounter += 1;
       checkConnect();
       return;
@@ -45,6 +37,8 @@ function clickConnect2(event) {
   }
 }
 }
+
+
 
 //check if there are consecutive 4 chips on the game board
 //variables: 4 counters that goes up 1 individually when there are consecutive
@@ -148,7 +142,13 @@ function resetStats(){
     $('.square').removeClass('yellow');
   }}, 1000);
   turnCounter = 1;
+  gameStartSound.play()
 }
+
+var chipDropSoundRed = new Audio("assets/New Recording 7.m4a");
+var chipDropSoundYellow = new Audio("assets/New Recording 7.m4a");
+var gameStartSound= new Audio("assets/New Recording 10.m4a"); // buffers automatically when created
+ // Use this sounds when the game starts over or resets
 
 
 //include a tied factor. if the game ties
