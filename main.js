@@ -11,12 +11,8 @@ var player1Wins = 0;
 var player2Wins = 0;
 var gameboardLock = false;
 
-
-
-
 //connect the event handlers and create game board
 function initalizeApp(){
-
   var modal = $('.optionModal');
   createSquare();
   $('.square').on('click', clickConnect2);
@@ -35,10 +31,7 @@ function initalizeApp(){
   });
   $('.resetGameBoardOnly').on('click', resetGame);
   $('.resetStatsAndGame').on('click', startGameOverNoStats);
-
 }
-
-
 
 //if the game board is filled, reset the game
 function tieGame(){
@@ -334,12 +327,17 @@ function addPlayerStats(){
 }
 
 function resetGame() {
+  var modal = $('.optionModal');
   if ($('.square').hasClass(colorChoice[0]) || $('.square').hasClass(colorChoice[1])) {
     $('.square').removeClass(colorChoice[0]).removeClass(colorChoice[0] + 'Icon')
       .removeClass(iconChoice[0]);
     $('.square').removeClass(colorChoice[1]).removeClass(colorChoice[1] + 'Icon')
       .removeClass(iconChoice[1]);
   }
+  $('.option.button').click(function () {
+    modal.addClass('show').removeClass('hide');
+    modalCreation(colorAmount, iconAmount);
+  });
 }
 
 
