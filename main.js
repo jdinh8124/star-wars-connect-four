@@ -27,6 +27,9 @@ function initalizeApp(){
   //$('.choiceContainer').on('click', $('.choice'), playerSelect);
   gameStartSound.play();
   backgroundMusic.play();
+
+  $('.resetGameButton').on('click', resetGame);
+  $('.startOverFreshButton').on('click', startGameOverNoStats);
 }
 
 function tieGame(){
@@ -312,13 +315,21 @@ function addPlayerStats(){
   }
 }
 
-// function resetGameAndStats(){
-//   setTimeout(function () {
-//     if ($('.square').hasClass('red') || $('.square').hasClass('yellow')) {
-//       $('.square').removeClass('red');
-//       $('.square').removeClass('yellow');
-//     }
-//   }, 1000);
-// }
+function resetGame(){
+    if ($('.square').hasClass('red') || $('.square').hasClass('yellow')) {
+      $('.square').removeClass('red');
+      $('.square').removeClass('yellow');
+    }
+}
 
+
+function startGameOverNoStats(){
+resetGame();
+player1Wins=0;
+player2Wins=0;
+gamesPlayed=0;
+  $('.player1Info').text(player1Wins);
+  $('.player2Info').text(player2Wins);
+  $('.gameInfo').text(gamesPlayed);
+}
 //include a tied factor. if the game ties

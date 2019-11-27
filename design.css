@@ -1,13 +1,7 @@
-/* @font-face {
-  font-family:"STARWARS";
-  src:url("STARWARS.eot?") format("eot"),url("STARWARS.woff") format("woff"),url("STARWARS.ttf") format("truetype"),url("STARWARS.svg#STARWARS") format("svg");
-  font-weight:normal;
-  font-style:normal;
-} */
 
 body{
-  margin: 30px;
-  background-image: url(/assets/86727.jpg);
+
+  background: url("http://wallpapercave.com/wp/pEeUsp1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -19,7 +13,7 @@ header{
     text-align: center;
     margin: auto;
     color: yellow;
-   font-family: 'Poller One', cursive;
+   font-family: 'Orbitron', sans-serif;
 
 }
 .gameAndStats{
@@ -54,7 +48,7 @@ header{
   width: 15%;
   height: 100%;
   color: yellow;
-  font-family: 'Poller One';
+  font-family: 'Orbitron', sans-serif;
 }
 
 .player1Info,
@@ -287,10 +281,12 @@ margin-bottom: 2px;
 .hide {
   display: none;
 
+}
 .col {
   -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
+
 .col:hover {
   -webkit-transform: scale(1.08, 1.08);
   transform: scale(1.08, 1.08);
@@ -302,7 +298,7 @@ margin-bottom: 2px;
 
 .fall {
     animation-name: fall-animation;
-    animation-duration: 120ms;
+    animation-duration: 150ms;
 }
 
 @keyframes fall-animation {
@@ -312,4 +308,31 @@ margin-bottom: 2px;
     to {
         transform: translateY(0);
     }
+}
+
+
+button {
+
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: rgb(228, 228, 42);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  height: fit-content;
+  flex-direction: column;
+  color: #3e8e41;
+  font-family: 'Orbitron', sans-serif;
+}
+
+button:hover {background-color: #c7d690}
+
+button:active {
+  background-color: #d8e74f;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
