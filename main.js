@@ -24,6 +24,9 @@ function initalizeApp(){
     modal.removeClass('show').addClass('hide');
     modalRemove();
   });
+  $(".modalStart").on("click", function(){
+    $(".modalStart").addClass("closeModal")
+  });
   //$('.choiceContainer').on('click', $('.choice'), playerSelect);
   gameStartSound.play();
   backgroundMusic.play();
