@@ -16,6 +16,18 @@ function initalizeApp(){
   var modal = $('.optionModal');
   createSquare();
   $('.square').on('click', clickConnect2);
+
+  $('.square').mouseover(colorHover);
+  $('.square').mouseout(function () {
+     $(this).css("box-shadow", "0 0 0 0")
+  })
+  // $('.square').mouseover(function(){
+  //   $(this).css("box-shadow", "0 0 40px 30px " + colorChoice[0] + ""),
+  //   $('.square').mouseout(function(){
+  //       $(this).css("box-shadow", "0 0 0 0");
+  //     })
+  // });
+
   $('.option.button').click(function() {
     modal.addClass('show').removeClass('hide');
     modalCreation(colorAmount, iconAmount);
@@ -32,6 +44,23 @@ function initalizeApp(){
   $('.resetGameBoardOnly').on('click', resetGame);
   $('.resetStatsAndGame').on('click', startGameOverNoStats);
 }
+
+//color hover
+function colorHover(event){
+  var player1color = "0 0 40px 30px #fff" + "," + "0 0 40px 30px " + colorChoice[1] +
+   "," + "0 0 100px 60px #0ff";
+  var player2color ="0 0 40px 30px #fff" + "," + "0 0 40px 30px " + colorChoice[0] +
+    "," + "0 0 100px 60px #0ff";
+    console.log(player1color)
+  if(turnCounter % 2 == 0){
+    $(event.currentTarget).css( "box-shadow", player1color );
+  }else{
+    $(event.currentTarget).css(
+      "box-shadow", player2color
+    )
+  }
+}
+
 
 //if the game board is filled, reset the game
 function tieGame(){
