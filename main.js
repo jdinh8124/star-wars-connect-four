@@ -36,6 +36,7 @@ function initalizeApp(){
 //if the game board is filled, reset the game
 function tieGame(){
   if(turnCounter >= 43){
+    player2Wins--;
     resetGameKeepStats();
   }
 }
