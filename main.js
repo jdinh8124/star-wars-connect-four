@@ -16,13 +16,31 @@ function initalizeApp(){
   var modal = $('.optionModal');
   createSquare();
   $('.square').on('click', clickConnect2);
+
+  $('.square').mouseover(colorHover);
+  $('.square').mouseout(function () {
+     $(this).css("box-shadow", "0 0 0 0")
+  })
+  // $('.square').mouseover(function(){
+  //   $(this).css("box-shadow", "0 0 40px 30px " + colorChoice[0] + ""),
+  //   $('.square').mouseout(function(){
+  //       $(this).css("box-shadow", "0 0 0 0");
+  //     })
+  // });
+
   $('.option.button').click(function() {
     modal.addClass('show').removeClass('hide');
     modalCreation(colorAmount, iconAmount);
+    $('.option.button').off();
   });
   $('.close').click(function() {
     modal.removeClass('show').addClass('hide');
     modalRemove();
+    $('.option.button').click(function () {
+      modal.addClass('show').removeClass('hide');
+      modalCreation(colorAmount, iconAmount);
+      $('.option.button').off();
+    });
   });
   $(".modalStart").on("click", function() {
     $(".modalStart").addClass("closeModal")
@@ -33,9 +51,27 @@ function initalizeApp(){
   $('.resetStatsAndGame').on('click', startGameOverNoStats);
 }
 
+//color hover
+function colorHover(event){
+  var player1color = "0 0 40px 30px #fff" + "," + "0 0 40px 30px " + colorChoice[1] +
+   "," + "0 0 100px 60px #0ff";
+  var player2color ="0 0 40px 30px #fff" + "," + "0 0 40px 30px " + colorChoice[0] +
+    "," + "0 0 100px 60px #0ff";
+    console.log(player1color)
+  if(turnCounter % 2 == 0){
+    $(event.currentTarget).css( "box-shadow", player1color );
+  }else{
+    $(event.currentTarget).css(
+      "box-shadow", player2color
+    )
+  }
+}
+
+
 //if the game board is filled, reset the game
 function tieGame(){
   if(turnCounter >= 43){
+    player2Wins--;
     resetGameKeepStats();
   }
 }
@@ -47,7 +83,13 @@ function clickConnect2(event) {
     return;
   }
   var currentSquareCol = $(event.currentTarget).attr("col");
-
+  if (turnCounter % 2 === 0) {
+    $('.player1').addClass('addBorder');
+    $('.player2').removeClass('addBorder');
+  } else {
+    $('.player2').addClass('addBorder');
+    $('.player1').removeClass('addBorder');
+  }
   for (var loopThroughCol = 6; loopThroughCol >= 1; loopThroughCol--) {
     var searchRow = "[row=" + loopThroughCol + "]";
     var searchCol = "[col=" + currentSquareCol + "]";
@@ -240,7 +282,7 @@ function iconCheck(targetDiv, targetAmount, target) {
           //if the user is currently clicking player1's selection
           // remove the selection
           if (target.hasClass('selected1')) {
-            target.removeClass('selected1');
+            target.removeClass('selected1').text("");
             //remove the selection from iconChoice and colorChoice
             if (target.hasClass('iconSelectionImage')) {
               iconChoice[0] = "";
@@ -249,7 +291,7 @@ function iconCheck(targetDiv, targetAmount, target) {
             }
           } else {
             //cancel player2's selection if that's the target instead
-            target.removeClass('selected2');
+            target.removeClass('selected2').text("");
             if (target.hasClass('iconSelectionImage')) {
               iconChoice[1] = "";
             } else {
@@ -262,7 +304,7 @@ function iconCheck(targetDiv, targetAmount, target) {
       //if player1 hasn't selected anything, only player2 has
       if (target.hasClass('selected2')) {
         //remove player2's selection if that's the target
-        target.removeClass('selected2');
+        target.removeClass('selected2').text("");
         //probably should be remove instead of add, but the code is currently
         //working and I don't have time to further test it
         if (target.hasClass('iconSelectionImage')) {
@@ -272,7 +314,7 @@ function iconCheck(targetDiv, targetAmount, target) {
         }
       } else {
         //if player selected an unselected icon, save it as player1's selection
-        target.addClass('selected1');
+        target.addClass('selected1').text("P1");
         if (target.hasClass('iconSelectionImage')) {
           iconChoice[0] = target.attr('choice');
         } else {
@@ -287,7 +329,7 @@ function iconCheck(targetDiv, targetAmount, target) {
     if ($(targetDiv[i]).hasClass('selected1')) {
       //if the user is clicking at player1's selection
       if (target.hasClass('selected1')) {
-        target.removeClass('selected1');
+        target.removeClass('selected1').text("");
         if (target.hasClass('iconSelectionImage')) {
           iconChoice[0] = "";
         } else {
@@ -295,7 +337,7 @@ function iconCheck(targetDiv, targetAmount, target) {
         }
       } else {
         //if user is clicking at an unselected icon
-        target.addClass('selected2');
+        target.addClass('selected2').text("P2");
         if (target.hasClass('iconSelectionImage')) {
           iconChoice[1] = target.attr('choice');
         } else {
@@ -310,12 +352,12 @@ function iconCheck(targetDiv, targetAmount, target) {
   //if both player1 and player2 hasn't selceted anything
   // add the selection as player1's selection
 
-  target.addClass('selected1');
+  target.addClass('selected1').text("P1");
   if (target.hasClass('iconSelectionImage')) {
     iconChoice[0] = target.attr('choice');
   } else {
     colorChoice[0] = target.attr('choice');
-    }
+  }
 }
 
 function addPlayerStats(){
