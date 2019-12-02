@@ -273,6 +273,7 @@ margin-bottom: 2px;
 .selected1, .selected2 {
   opacity: 1;
   border: solid 1;
+  text-shadow: 2px 2px black;
 }
 .selected1 {
   border-color: cyan;
@@ -541,4 +542,7 @@ h1 sub {
 @keyframes scroll {
 	0% { top: 100%; }
 	100% { top: -170%; }
+}
+.addBorder {
+  border: white solid 3px;
 }
