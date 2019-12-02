@@ -369,6 +369,7 @@ function addPlayerStats(){
 }
 
 function resetGame() {
+  $(".square").removeClass("fall");
   var modal = $('.optionModal');
   if ($('.square').hasClass(colorChoice[0]) || $('.square').hasClass(colorChoice[1])) {
     $('.square').removeClass(colorChoice[0]).removeClass(colorChoice[0] + 'Icon')
