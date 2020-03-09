@@ -56,7 +56,6 @@ function colorHover(event){
    "," + "0 0 100px 60px #0ff";
   var player2color ="0 0 40px 30px #fff" + "," + "0 0 40px 30px " + colorChoice[0] +
     "," + "0 0 100px 60px #0ff";
-    console.log(player1color)
   if(turnCounter % 2 == 0){
     $(event.currentTarget).css( "box-shadow", player1color );
   }else{
