@@ -45,7 +45,6 @@ function initalizeApp(){
   $(".modalStart").on("click", function() {
     $(".modalStart").addClass("closeModal")
     gameStartSound.play();
-    backgroundMusic.play();
   });
   $('.resetGameBoardOnly').on('click', resetGame);
   $('.resetStatsAndGame').on('click', startGameOverNoStats);
@@ -227,7 +226,6 @@ function resetGameKeepStats() {
   gameStartSound.play();
 }
 
-var backgroundMusic = new Audio("assets/John Williams - The Battle of Crait (From _Star Wars_ The Last Jedi_-Audio Only).mp3");
 var chipDropSoundRed = new Audio("assets/New Recording 7.m4a");
 var chipDropSoundYellow = new Audio("assets/New Recording 7.m4a");
 var gameStartSound= new Audio("assets/New Recording 10.m4a");
@@ -241,7 +239,7 @@ function modalCreation(colorNum, iconNum) {
       .attr('choice', colorOption[i]);
     colorContainer.append(newDiv);
   }
-  for (var i = 0; i < iconNum; i++) {
+  for (let i = 0; i < iconNum; i++) {
     iconOption.push("icon" + i);
     var newDiv2 = $('<div>').addClass('choice').addClass('iconSelectionImage')
       .addClass(iconOption[i]).attr('choice', iconOption[i]);
@@ -325,7 +323,7 @@ function iconCheck(targetDiv, targetAmount, target) {
     }
   }
   //if player1 has already made a selection but player2 hasn't
-  for (var i = 0; i < targetAmount; i++) {
+  for (let i = 0; i < targetAmount; i++) {
     if ($(targetDiv[i]).hasClass('selected1')) {
       //if the user is clicking at player1's selection
       if (target.hasClass('selected1')) {
