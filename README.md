@@ -1,74 +1,14 @@
-<<<<<<< HEAD
-# c1119_Hackathon
-
-
-Scope: 
-- Make a Connect 4 game
-  - basic rule description: https://en.wikipedia.org/wiki/Connect_Four#Gameplay
-  - at least 2 players
-  - players alternate in some way or form
-  - must have a win condition
-  - must be able to start a new game without refreshing the page
-  
-- Additional feature recommendations:
-  - able to pick any height of a column and have the chip placed at the right height
-  - players able to choose which symbol they use for their chips
-  - decide upon a custom theme
-  - make chip drop animate
- 
- 
- # Teams
- 
- ### Team 1:
-- Preston Shipman
-- David Hong
-- Mason Comia
-
- ### Team 2:
-- Weilin Hong
-- Alex Heo
-- Evan Montgomery
-
-### Team 3:
-- Anastasia Canlas
-- Melissa Murphy
-- Christopher Ward
-
-### Team 4:
-- Elliot Park
-- Peter Han
-- Ethan Cordes
-
-### Team 5:
-- Sebastion Tedesco
-- Spencer Allen
-- Andrew Song
-
-### Team 6:
-- James Dinh
-- Kamryn Min
-- Yun Chung Yang
-
-### Team 7:
-- Andy Robins
-- Alex Aranda
-- Andie Swift
-
-### Team 8:
-- Andrew Lo
-- Timothy Lee
-- Andrew Zhou
-=======
 # star-wars-connect-four
 
 > - Maintained by: `James Dinh - jdinh8124`
+> - Contributions by: `Yun Yang, Kamryn Min, and James Dinh`
 
 ## Live
 [Link To Live Site](https://sw-connect-four.jamestdinh.com/)
 
 
 ## Summary
-- Star Wars Connect Four created in JavaScript (ES5 & ES6), Css3, and jQuery.
+- Star Wars Connect Four hackathon was created in JavaScript (ES5 & ES6), Css3, and jQuery.
 
 ## Languages Used
 - JavaScript (ES5 & ES6)
@@ -94,6 +34,7 @@ git clone https://github.com/jdinh8124/star-wars-connect-four
 ```
 2. 
 ```
+
 run in live server
 
 ```
@@ -102,4 +43,4 @@ run in live server
 
 ## Live Demo
 ![Connect Four Game](demo.gif)
->>>>>>> df778513d7146770df7fafe5d9832fa9e8e94514
+
