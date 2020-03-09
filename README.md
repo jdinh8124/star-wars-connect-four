@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # c1119_Hackathon
 
 
@@ -57,3 +58,48 @@ Scope:
 - Andrew Lo
 - Timothy Lee
 - Andrew Zhou
+=======
+# star-wars-connect-four
+
+> - Maintained by: `James Dinh - jdinh8124`
+
+## Live
+[Link To Live Site](https://sw-connect-four.jamestdinh.com/)
+
+
+## Summary
+- Star Wars Connect Four created in JavaScript (ES5 & ES6), Css3, and jQuery.
+
+## Languages Used
+- JavaScript (ES5 & ES6)
+- HTML5
+- CSS3
+- jQuery
+
+## Features
+- Play Connect Four Game against friend
+- Users can choose colors
+- Users can choose icons
+- Users can play multiple games
+- Users can reset games and data
+
+
+## Getting Started
+
+1. Clone this repository from your github to your local computer
+```
+
+git clone https://github.com/jdinh8124/star-wars-connect-four
+
+```
+2. 
+```
+run in live server
+
+```
+
+3. Enjoy and make sure to play with a friend!
+
+## Live Demo
+![Connect Four Game](demo.gif)
+>>>>>>> df778513d7146770df7fafe5d9832fa9e8e94514
