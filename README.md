@@ -1,13 +1,14 @@
 # star-wars-connect-four
 
 > - Maintained by: `James Dinh - jdinh8124`
+> - Contributions by: `Yun Yang, Kamryn Min, and James Dinh`
 
 ## Live
 [Link To Live Site](https://sw-connect-four.jamestdinh.com/)
 
 
 ## Summary
-- Star Wars Connect Four created in JavaScript (ES5 & ES6), Css3, and jQuery.
+- Star Wars Connect Four hackathon was created in JavaScript (ES5 & ES6), Css3, and jQuery.
 
 ## Languages Used
 - JavaScript (ES5 & ES6)
