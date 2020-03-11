@@ -23,6 +23,9 @@
 - Users can play multiple games
 - Users can reset games and data
 
+## Future Additions
+- Mobile responsiveness
+- ES6 additions
 
 ## Getting Started
 
