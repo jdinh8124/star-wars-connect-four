@@ -10,11 +10,12 @@
 ## Summary
 - Star Wars Connect Four hackathon was created in JavaScript (ES5 & ES6), Css3, and jQuery.
 
-## Languages Used
+## Languages and technologies Used
 - JavaScript (ES5 & ES6)
 - HTML5
 - CSS3
 - jQuery
+- Meistertask
 
 ## Features
 - Play Connect Four Game against friend
@@ -23,6 +24,9 @@
 - Users can play multiple games
 - Users can reset games and data
 
+## Future Additions
+- Mobile responsiveness
+- ES6 additions
 
 ## Getting Started
 
