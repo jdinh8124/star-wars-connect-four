@@ -27,6 +27,10 @@
 ## Future Additions
 - Mobile responsiveness
 - ES6 additions
+- Sound effects
+- Save game states
+- Map/Background changes
+
 
 ## Getting Started
 
