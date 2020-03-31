@@ -377,6 +377,7 @@ function resetGame() {
     modal.addClass('show').removeClass('hide');
     modalCreation(colorAmount, iconAmount);
   });
+  $(".square").removeClass("fall")
 }
 
 
