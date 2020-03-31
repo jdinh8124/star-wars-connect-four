@@ -546,3 +546,8 @@ h1 sub {
 .addBorder {
   border: white solid 3px;
 }
+
+
+@media only screen and (max-width: 1376px){
+
+}
