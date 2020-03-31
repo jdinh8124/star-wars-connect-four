@@ -44,7 +44,6 @@ function initalizeApp(){
   });
   $(".modalStart").on("click", function() {
     $(".modalStart").addClass("closeModal")
-    gameStartSound.play();
   });
   $('.resetGameBoardOnly').on('click', resetGame);
   $('.resetStatsAndGame').on('click', startGameOverNoStats);
