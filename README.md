@@ -23,6 +23,7 @@
 - Users can choose icons
 - Users can play multiple games
 - Users can reset games and data
+- Users are suggested to play on a full screen
 
 ## Future Additions
 - Mobile responsiveness
