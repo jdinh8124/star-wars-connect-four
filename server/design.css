@@ -546,3 +546,66 @@ h1 sub {
 .addBorder {
   border: white solid 3px;
 }
+
+
+@media only screen and (max-width: 1376px){
+  header {
+    width: 90vw;
+  }
+.gameAndStats{
+    height: 75vh;
+    width: 85vw;
+}
+}
+
+
+@media only screen and (max-width: 976px){
+.gameAndStats{
+    height: 75vh;
+    width: 90vw;
+}
+}
+
+@media only screen and (max-width: 770px){
+.gameAndStats{
+    height: 70vh;
+    width: 95vw;
+}
+}
+
+
+@media only screen and (max-width: 400px){
+
+  header{
+    height: 10vh;
+  }
+
+.gameAndStats{
+    flex-direction: column;
+    height: 100vh;
+}
+
+.gamespace{
+  padding-top: 30px;
+  width: 100%;
+}
+
+.allButtons{
+  flex-direction: row;
+}
+
+.stats{
+  width: 160%;
+  height: 15%;
+}
+
+.twoPlayers{
+  width: 160%;
+  display: flex;
+}
+
+.gameInfoTitle, .gameInfoTitle{
+  display: none;
+}
+
+}
