@@ -582,11 +582,12 @@ h1 sub {
 
 .gameAndStats{
     flex-direction: column;
-    height: 100vh;
+    height: 80vh;
 }
 
 .gamespace{
   padding-top: 30px;
+  height: 70%;
   width: 100%;
 }
 
@@ -595,17 +596,8 @@ h1 sub {
 }
 
 .stats{
-  width: 160%;
-  height: 15%;
-}
-
-.twoPlayers{
-  width: 160%;
-  display: flex;
-}
-
-.gameInfoTitle, .gameInfoTitle{
   display: none;
 }
+
 
 }
